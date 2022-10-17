@@ -1,0 +1,79 @@
+removeStrategy:
+  rbac: SYNC
+roles:
+- filterable: 'true'
+  permissions:
+  - hudson.model.Hudson.Read
+  name: authenticated
+- filterable: 'true'
+  permissions:
+  - hudson.model.Hudson.UploadPlugins
+  - hudson.model.Hudson.ConfigureUpdateCenter
+  - hudson.model.Hudson.Administer
+  - hudson.model.Hudson.RunScripts
+  name: jenkins-oc-admin
+- filterable: 'true'
+  permissions:
+  - hudson.model.View.Delete
+  - hudson.model.Computer.Connect
+  - hudson.model.Run.Delete
+  - hudson.model.Hudson.UploadPlugins
+  - hudson.model.View.Configure
+  - hudson.model.Item.Promote
+  - jenkins.metrics.api.Metrics.View
+  - com.cloudbees.jenkins.support.SupportPlugin.DownloadBundle
+  - hudson.model.Item.Configure
+  - hudson.model.Item.Cancel
+  - hudson.model.Item.Read
+  - com.cloudbees.plugins.credentials.CredentialsProvider.View
+  - jenkins.metrics.api.Metrics.HealthCheck
+  - hudson.model.Item.Build
+  - hudson.scm.SCM.Tag
+  - hudson.model.Item.Move
+  - com.cloudbees.plugins.credentials.CredentialsProvider.Update
+  - hudson.model.Item.Create
+  - hudson.model.Item.Workspace
+  - jenkins.metrics.api.Metrics.ThreadDump
+  - hudson.model.View.Read
+  - hudson.model.Hudson.RunScripts
+  - hudson.model.View.Create
+  - hudson.model.Item.Delete
+  - com.cloudbees.plugins.credentials.CredentialsProvider.Create
+  - hudson.model.Run.Update
+  name: jenkins-oc-operations
+- filterable: 'true'
+  name: anonymous
+- filterable: 'true'
+  permissions:
+  - hudson.model.View.Configure
+  - hudson.model.Item.Promote
+  - jenkins.metrics.api.Metrics.View
+  - hudson.model.Item.Cancel
+  - hudson.model.Item.Read
+  - com.cloudbees.plugins.credentials.CredentialsProvider.View
+  - com.cloudbees.jenkins.plugin.metrics.views.Alerter.View
+  - hudson.model.Item.Build
+  - hudson.model.Item.ExtendedRead
+  - hudson.model.Hudson.Read
+  - hudson.model.Item.Workspace
+  - hudson.model.View.Read
+  - hudson.model.Computer.ExtendedRead
+  - hudson.model.Item.Request
+  name: jenkins-oc-developer
+groups:
+- members:
+    external_groups:
+    - Jenkins-OC-Admin
+  roles:
+  - name: jenkins-oc-admin
+    grantedAt: current
+  name: jenkins-admins
+- roles:
+  - name: jenkins-oc-developer
+    grantedAt: current
+  name: jenkins-developers
+- roles:
+  - name: jenkins-oc-operations
+    grantedAt: current
+  name: jenkins-manual-deploy
+- name: rootadmin

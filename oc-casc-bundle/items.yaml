@@ -1,0 +1,58 @@
+removeStrategy:
+  rbac: SYNC
+  items: NONE
+items:
+- kind: backupAndRestore
+  name: cb--oc-rhel8-backup
+  blockBuildWhenDownstreamBuilding: false
+  blockBuildWhenUpstreamBuilding: false
+  buildersList:
+  - backupBuilder:
+      subjects:
+      - buildRecordSubject: {}
+      - jobConfigurationSubject: {}
+      - systemConfigurationSubject:
+          omitMasterKey: false
+      format:
+        tarGzFormat: {}
+      exclusive: false
+      store:
+        s3Store:
+          bucketName: va-devops-cloudbees-ci-backups
+          sse: true
+          bucketFolder: cb-oc-latestVersion
+          credentialsId: ''
+          region: us-east-1
+      retentionPolicy:
+        noRetentionPolicy: {}
+      safeDelaySeconds: 0
+  concurrentBuild: false
+  description: ''
+  disabled: false
+  displayName: cb--oc-rhel8-backup
+- kind: backupAndRestore
+  name: cb-oc-backup
+  blockBuildWhenDownstreamBuilding: false
+  blockBuildWhenUpstreamBuilding: false
+  buildersList:
+  - backupBuilder:
+      subjects:
+      - buildRecordSubject: {}
+      - jobConfigurationSubject: {}
+      format:
+        tarGzFormat: {}
+      exclusive: false
+      store:
+        s3Store:
+          bucketName: va-devops-cloudbees-ci-backups
+          sse: true
+          bucketFolder: ''
+          credentialsId: sa_ec2deploy_tool
+          region: us-east-1
+      retentionPolicy:
+        noRetentionPolicy: {}
+      safeDelaySeconds: 0
+  concurrentBuild: false
+  description: ''
+  disabled: false
+  displayName: cb-oc-backup
