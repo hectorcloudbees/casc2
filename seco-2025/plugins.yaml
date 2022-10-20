@@ -1,0 +1,4 @@
+plugins:
+- {id: google-login}
+- {id: cloudbees-casc-api}
+- {id: managed-master-hibernation}

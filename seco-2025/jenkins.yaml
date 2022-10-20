@@ -1,0 +1,9 @@
+jenkins:
+  agentProtocols: break
+  doesnotexists: nope
+unclassified:
+  hibernationConfiguration:
+    activities:
+    - "web"
+    enabled: true
+    gracePeriod: 57600

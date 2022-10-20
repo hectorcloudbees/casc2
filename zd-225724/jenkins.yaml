@@ -1,0 +1,11 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - gitHubApp:
+          apiUri: "https://github.beescloud.com/api/v3"
+          appID: "149"
+          description: "https://github.beescloud.com/github-apps/team-gke-sda-dse-apac for support-team"
+          id: "github.beescloud.com-team-gke-sda-dse-apac-support-team"
+          owner: "support-team"
+          privateKey: "${GITHUB_APP_PRIVATE_KEY}"

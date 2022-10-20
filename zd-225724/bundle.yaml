@@ -1,0 +1,6 @@
+apiVersion: "1"
+id: "zd-225714"
+description: "zd-225714"
+version: "1"
+jcasc:
+  - "jenkins.yaml"

@@ -1,0 +1,918 @@
+removeStrategy:
+  rbac: SYNC
+  items: NONE
+items:
+- kind: folder
+  name: antons
+  description: ''
+  displayName: antons
+  items:
+  - kind: pipeline
+    name: mywizard-dmt-confluence-597714063940-dev
+    concurrentBuild: false
+    definition:
+      cpsScmFlowDefinition:
+        scriptPath: jenkinsfile-docker-acr-ecr.groovy
+        scm:
+          gitSCM:
+            userRemoteConfigs:
+            - userRemoteConfig:
+                credentialsId: GIT_CREDENTIALS
+                url: https://innersource.accenture.com/scm/adop-e/adop-e-kaniko-ami-build.git
+            branches:
+            - branchSpec:
+                name: ASYFKHXP-8633
+        lightweight: true
+    description: ''
+    disabled: false
+    displayName: mywizard-dmt-confluence-597714063940-dev
+    properties:
+    - rebuildSettings:
+        rebuildDisabled: false
+        autoRebuild: false
+    - buildDiscarder:
+        strategy:
+          logRotator:
+            artifactDaysToKeep: -1
+            artifactNumToKeep: -1
+            daysToKeep: 360
+            numToKeep: 10
+    - parameters:
+        parameterDefinitions:
+        - string:
+            trim: false
+            name: GIT_CLONE_URL
+        - string:
+            trim: false
+            defaultValue: Dockerfile
+            name: DOCKERFILE_PATH
+            description: Path to Dockerfile in the repository.
+        - string:
+            trim: false
+            defaultValue: arn:aws:iam::<ACCOUNT_ID>:role/mywizard-dmt-platform-iac-standard-iam-role
+            name: AWS_ROLE_ARN
+            description: Role to use for building image.
+        - string:
+            trim: false
+            defaultValue: /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+            name: AWS_WEB_IDENTITY_TOKEN_FILE
+            description: Path to token for the web identity, keep default.
+        - string:
+            trim: false
+            name: ECR_REPOSITORY_URL
+            description: '(Optional) Format: <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/<ECR_REPOSITORY>
+              - repository has to exist and Agent pod has to have necessary IAM permissions.'
+        - string:
+            trim: false
+            name: ACR_REPOSITORY_URL
+            description: '(Optional) Format: <ACR_REGISTRY>.azurecr.io/<ACR_REPOSITORY>
+              - repository has to exist and credentials enabled.'
+        - credentials:
+            credentialType: Username with password
+            defaultValue: ''
+            name: ACR_CREDENTIALS
+            description: Azure Container Registry credentials which are enabled from
+              created registry.
+            required: false
+    resumeBlocked: false
+  properties:
+  - pipeline-model-docker:
+      registry:
+        dockerRegistryEndpoint: {}
+      dockerLabel: ''
+  - envVars: {}
+  - kubernetesFolderProperty: {}
+  - itemRestrictions:
+      filter: false
+- kind: folder
+  name: Cartridge_Loader
+  displayName: Cartridge_Loader
+  healthMetrics:
+  - worstChildHealthMetric:
+      recursive: true
+  items:
+  - kind: freeStyle
+    name: Load_Cartridge
+    blockBuildWhenDownstreamBuilding: false
+    blockBuildWhenUpstreamBuilding: false
+    buildWrappers:
+    - preBuildCleanup:
+        disableDeferredWipeout: false
+        deleteDirs: false
+        cleanupParameter: ''
+        externalDelete: ''
+    - secretBuildWrapper:
+        bindings:
+        - usernamePassword:
+            usernameVariable: username
+            passwordVariable: password
+            credentialsId: ${PROJECT_CREDENTIALS}
+    builders:
+    - shell:
+        command: "\n            set -e\n            # Adjust variables\n         \
+          \   echo \"[INFO] - Adjusting variables\"\n            upstreamRepo=${CARTRIDGE_ORIGIN_REPOSITORY_NAME}\n\
+          \            forkProject=${CARTRIDGE_DESTINATION_PROJECT_KEY}\n        \
+          \    jobPath=$(echo \"$JOB_PATH\" | sed \"s#{reponame}#$upstreamRepo#\"\
+          )\n            repoName=$(echo \"$CARTRIDGE_DESTINATION_REPO_NAME\" | sed\
+          \ \"s#{reponame}#$upstreamRepo#\")\n\n            # Fork cartridge origin\
+          \ repo to desitination project\n            echo \"[INFO] - Forking cartridge\
+          \ origin repository to the destination project\"\n            curl https://innersource.accenture.com/rest/api/1.0/projects/MWDC/repos/$upstreamRepo\
+          \ -u $username:$password -X POST -H 'Content-Type: application/json' -d\
+          \ \"{\\\"slug\\\": \\\"$repoName\\\", \\\"name\\\": \\\"$repoName\\\", \\\
+          \"project\\\": {\\\"key\\\": \\\"$forkProject\\\"}}\"\n\n            # Clone\
+          \ the forked repository in order to retrieve the jobs_multitenant.groovy\
+          \ script\n            echo \"[INFO] - Cloning the forked repository to retrieve\
+          \ jobs_multitenant.groovy script\"\n            git clone https://${username}:${password}@innersource.accenture.com/scm/$forkProject/$repoName.git\
+          \ .\n            ls -al | grep jobs_multitenant.groovy\n\n            #\
+          \ Inject the required variables for setting up the cartridge pipeline\n\
+          \            echo \"[INFO] - Adjusting the required variables in jobs_multitenant.groovy\"\
+          \n            sed -i \"s:jobPath:$jobPath:g\" jobs_multitenant.groovy\n\
+          \            sed -i \"s:forkProject:$forkProject:g\" jobs_multitenant.groovy\n\
+          \            sed -i \"s:forkRepo:$forkRepo:g\" jobs_multitenant.groovy\n\
+          \            sed -i \"s#gitUrl#\"https://innersource.accenture.com/scm/$forkProject/$repoName.git\"\
+          #g\" jobs_multitenant.groovy\n            sed -i \"s:gitCredentials:$PROJECT_CREDENTIALS:g\"\
+          \ jobs_multitenant.groovy\n        "
+    - jobDsl:
+        ignoreMissingFiles: false
+        removedJobAction: IGNORE
+        unstableOnDeprecation: false
+        lookupStrategy: JENKINS_ROOT
+        additionalClasspath: ''
+        failOnSeedCollision: false
+        sandbox: false
+        ignoreExisting: false
+        removedViewAction: IGNORE
+        targets: jobs_multitenant.groovy
+        failOnMissingPlugin: false
+    concurrentBuild: false
+    description: 'Pre-requisites (wiki): https://alm.accenture.com/wiki/display/MDMCIJSN/Multi-Tenant+Cartridge+Pre-requisites'
+    disabled: false
+    displayName: Load_Cartridge
+    label: docker
+    parameters:
+    - string:
+        trim: false
+        defaultValue: /Cartridge_Loader/{reponame}
+        name: JOB_PATH
+        description: Cartridge job path. {reponame} will be replaced by origin repository
+          name.
+    - string:
+        trim: false
+        defaultValue: ''
+        name: CARTRIDGE_ORIGIN_REPOSITORY_NAME
+        description: The name of the origin repository retrieved from https://innersource.accenture.com/projects/MWDC
+          (ex. java-cartridge).
+    - string:
+        trim: false
+        defaultValue: ''
+        name: CARTRIDGE_DESTINATION_PROJECT_KEY
+        description: Key to the destination/your BitBucket project (ex. MWDC (from
+          https://innersource.accenture.com/projects/MWDC)).
+    - string:
+        trim: false
+        defaultValue: '{reponame}-fork'
+        name: CARTRIDGE_DESTINATION_REPO_NAME
+        description: Name of the fork repository to create. {reponame} will be replaced
+          by origin repo name.
+    - credentials:
+        credentialType: com.cloudbees.plugins.credentials.common.StandardCredentials
+        defaultValue: innersource_tech_username_password
+        name: PROJECT_CREDENTIALS
+        description: Credentials for accessing your project on Innersource
+        required: true
+    scm:
+      none: {}
+    scmCheckoutStrategy:
+      standard: {}
+- kind: folder
+  name: kashif
+  displayName: kashif
+  items:
+  - kind: pipeline
+    name: mywizard-dmt-confluence-597714063940-dev
+    concurrentBuild: false
+    definition:
+      cpsScmFlowDefinition:
+        scriptPath: jenkinsfile-docker-acr-ecr.groovy
+        scm:
+          gitSCM:
+            userRemoteConfigs:
+            - userRemoteConfig:
+                credentialsId: GIT_CREDENTIALS
+                url: https://innersource.accenture.com/scm/adop-e/adop-e-kaniko-ami-build.git
+            branches:
+            - branchSpec:
+                name: '*/master'
+        lightweight: true
+    description: ''
+    disabled: false
+    displayName: mywizard-dmt-confluence-597714063940-dev
+    properties:
+    - buildDiscarder:
+        strategy:
+          logRotator:
+            artifactDaysToKeep: -1
+            artifactNumToKeep: -1
+            daysToKeep: 360
+            numToKeep: 10
+    - rebuildSettings:
+        rebuildDisabled: false
+        autoRebuild: false
+    - parameters:
+        parameterDefinitions:
+        - string:
+            trim: false
+            name: GIT_CLONE_URL
+        - string:
+            trim: false
+            defaultValue: Dockerfile
+            name: DOCKERFILE_PATH
+            description: Path to Dockerfile in the repository.
+        - string:
+            trim: false
+            name: ECR_REPOSITORY_URL
+            description: '(Optional) Format: <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/<ECR_REPOSITORY>
+              - repository has to exist and Agent pod has to have necessary IAM permissions.'
+        - string:
+            trim: false
+            name: ACR_REPOSITORY_URL
+            description: '(Optional) Format: <ACR_REGISTRY>.azurecr.io/<ACR_REPOSITORY>
+              - repository has to exist and credentials enabled.'
+        - credentials:
+            credentialType: Username with password
+            defaultValue: ''
+            name: ACR_CREDENTIALS
+            description: Azure Container Registry credentials which are enabled from
+              created registry.
+            required: false
+    resumeBlocked: false
+  - kind: pipeline
+    name: ssss
+    concurrentBuild: false
+    definition:
+      cpsScmFlowDefinition:
+        scriptPath: jenkinsfile-docker-acr-ecr.groovy
+        scm:
+          gitSCM:
+            userRemoteConfigs:
+            - userRemoteConfig:
+                credentialsId: TF-KS
+                url: ssh://git@git.dev.adop.accenture.com/adop-e/adop-e-kaniko-ami-build.git
+            branches:
+            - branchSpec:
+                name: '*/master'
+        lightweight: true
+    description: ''
+    disabled: false
+    displayName: ssss
+    properties:
+    - buildDiscarder:
+        strategy:
+          logRotator:
+            artifactDaysToKeep: -1
+            artifactNumToKeep: -1
+            daysToKeep: 360
+            numToKeep: 10
+    - rebuildSettings:
+        rebuildDisabled: false
+        autoRebuild: false
+    - parameters:
+        parameterDefinitions:
+        - string:
+            trim: false
+            name: GIT_CLONE_URL
+        - string:
+            trim: false
+            defaultValue: Dockerfile
+            name: DOCKERFILE_PATH
+            description: Path to Dockerfile in the repository.
+        - string:
+            trim: false
+            name: ECR_REPOSITORY_URL
+            description: '(Optional) Format: <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/<ECR_REPOSITORY>
+              - repository has to exist and Agent pod has to have necessary IAM permissions.'
+        - string:
+            trim: false
+            name: ACR_REPOSITORY_URL
+            description: '(Optional) Format: <ACR_REGISTRY>.azurecr.io/<ACR_REPOSITORY>
+              - repository has to exist and credentials enabled.'
+        - credentials:
+            credentialType: com.cloudbees.plugins.credentials.common.StandardCredentials
+            defaultValue: ''
+            name: ACR_CREDENTIALS
+            description: Azure Container Registry credentials which are enabled from
+              created registry.
+            required: false
+    resumeBlocked: false
+  - kind: pipeline
+    name: windows-test-pipeline
+    concurrentBuild: true
+    definition:
+      cpsFlowDefinition:
+        sandbox: true
+        script: |2-
+
+          pipeline {
+              agent { label 'core2-ecs-build' }
+              }
+              stages {
+                  stage('Test') {
+                      steps {
+                          container('shell') {
+                              powershell 'Get-ChildItem Env: | Sort Name'
+                              powershell 'Start-Sleep 900' //Sleep command for 900 seconds, to test ASG properly.
+                          }
+                      }
+                  }
+              }
+          }
+    description: ''
+    disabled: false
+    displayName: windows-test-pipeline
+    properties:
+    - rebuildSettings:
+        rebuildDisabled: false
+        autoRebuild: false
+    resumeBlocked: false
+  - kind: pipeline
+    name: windows-test-pipeline-base
+    concurrentBuild: true
+    definition:
+      cpsFlowDefinition:
+        sandbox: true
+        script: |-
+          pipeline {
+            agent {
+              label 'ecs-base'
+            }
+              stages {
+                  stage('Example Build') {
+                      steps {
+                          sh 'pwd'
+                          sh 'sleep 9999'
+                      }
+                  }
+              }
+          }
+    description: ''
+    disabled: false
+    displayName: windows-test-pipeline-base
+    properties:
+    - rebuildSettings:
+        rebuildDisabled: false
+        autoRebuild: false
+    resumeBlocked: false
+  properties:
+  - folderCredentialsProperty: {}
+- kind: pipeline
+  name: Load_Cartridge
+  concurrentBuild: true
+  definition:
+    cpsFlowDefinition:
+      sandbox: true
+      script: |-
+        def customNamespaceEnabled = true;
+        if("${SCM_NAMESPACE}" == null || "${SCM_NAMESPACE}".equals("")) {
+            customNamespaceEnabled = false;
+        }
+
+        // Setup Workspace Folder
+        build job: 'Workspace_Management/Generate_Workspace', parameters: [[$class: 'StringParameterValue', name: 'WORKSPACE_NAME', value: "${WORKSPACE_NAME}"]]
+
+        // Setup Project Folder
+        build job: "${WORKSPACE_NAME}/Project_Management/Generate_Project", parameters: [[$class: 'StringParameterValue', name: 'PROJECT_NAME', value: "${PROJECT_NAME}"], [$class: 'BooleanParameterValue', name: 'CUSTOM_SCM_NAMESPACE', value: customNamespaceEnabled]]
+
+        // Load Cartridge
+        retry(5)
+        {
+            build job: "${WORKSPACE_NAME}/${PROJECT_NAME}/Cartridge_Management/Load_Cartridge", parameters: [[$class: 'StringParameterValue', name: 'CARTRIDGE_FOLDER', value: "${CARTRIDGE_FOLDER}"], [$class: 'StringParameterValue', name: 'FOLDER_DISPLAY_NAME', value: "${FOLDER_DISPLAY_NAME}"], [$class: 'StringParameterValue', name: 'FOLDER_DESCRIPTION', value: "${FOLDER_DESCRIPTION}"], [$class: 'BooleanParameterValue', name: 'ENABLE_CODE_REVIEW', value: "${ENABLE_CODE_REVIEW}".toBoolean()], [$class: 'BooleanParameterValue', name: 'OVERWRITE_REPOS', value: "${OVERWRITE_REPOS}".toBoolean()], [$class: 'StringParameterValue', name: 'CARTRIDGE_CLONE_URL', value: "${CARTRIDGE_CLONE_URL}"], [$class: 'StringParameterValue', name: 'SCM_NAMESPACE', value: "${SCM_NAMESPACE}"], [$class: 'StringParameterValue', name: 'SCM_PROVIDER', value: "${SCM_PROVIDER}"]]
+        }
+  description: ''
+  disabled: false
+  displayName: Load_Cartridge
+  properties:
+  - parameters:
+      parameterDefinitions:
+      - string:
+          trim: false
+          defaultValue: Example_Workspace
+          name: WORKSPACE_NAME
+          description: Name of the workspace to load cartridge in (either existing
+            or new).
+      - string:
+          trim: false
+          defaultValue: Example_Project
+          name: PROJECT_NAME
+          description: Name of the project to load cartridge in (either existing or
+            new).
+      - string:
+          trim: false
+          defaultValue: ''
+          name: SCM_NAMESPACE
+          description: (Optional) The namespace for your SCM provider which will prefix
+            your created repositories.
+      - extensibleChoiceParameterDefinition:
+          editable: true
+          name: CARTRIDGE_CLONE_URL
+          description: Cartridge URL to load.
+          choiceListProvider:
+            systemGroovyChoiceListProvider:
+              defaultChoice: Top
+              groovyScript:
+                secureGroovyScript:
+                  sandbox: true
+                  script: |
+                    import jenkins.model.*
+                    nodes = Jenkins.instance.globalNodeProperties
+                    nodes.getAll(hudson.slaves.EnvironmentVariablesNodeProperty.class)
+                    envVars = nodes[0].envVars
+                    def URLS = envVars['CARTRIDGE_SOURCES'];
+                    if (URLS == null) {
+                        println "[ERROR] CARTRIDGE_SOURCES Jenkins environment variable has not been set";
+                        return ['Type the cartridge URL (or add CARTRIDGE_SOURCES as a Jenkins environment variable if you wish to see a list here)'];
+                    }
+                    if (URLS.length() < 11) {
+                        println "[ERROR] CARTRIDGE_SOURCES Jenkins environment variable does not seem to contain valid URLs";
+                        return ['Type the cartridge URL (the CARTRIDGE_SOURCES Jenkins environment variable does not seem valid)'];
+                    }
+                    def cartridge_urls = [];
+                    URLS.split(';').each{ source_url ->
+                    try {
+                        def html = source_url.toURL().text;
+                        html.eachLine { line ->
+                        if (line.contains("url:")) {
+                            def url = line.substring(line.indexOf("\"") + 1, line.lastIndexOf("\""))
+                            cartridge_urls.add(url)
+                        }
+                      }
+                    }
+                    catch (UnknownHostException e) {
+                        cartridge_urls.add("[ERROR] Provided URL was not found: ${source_url}");
+                        println "[ERROR] Provided URL was not found: ${source_url}";
+                    }
+                    catch (Exception e) {
+                        cartridge_urls.add("[ERROR] Unknown error while processing: ${source_url}");
+                        println "[ERROR] Unknown error while processing: ${source_url}";
+                    }
+                    }
+                    return cartridge_urls;
+              usePredefinedVariables: false
+          editableType: NoFilter
+      - extensibleChoiceParameterDefinition:
+          editable: false
+          name: SCM_PROVIDER
+          description: Your chosen SCM Provider and the appropriate cloning protocol
+          choiceListProvider:
+            systemGroovyChoiceListProvider:
+              defaultChoice: Top
+              groovyScript:
+                secureGroovyScript:
+                  sandbox: true
+                  script: |2
+
+                    import hudson.model.*;
+                    import hudson.util.*;
+
+                    base_path = "/var/jenkins_home/userContent/datastore/pluggable/scm"
+
+                    // Initialise folder containing all SCM provider properties files
+                    String PropertiesPath = base_path + "/ScmProviders/"
+                    File folder = new File(PropertiesPath)
+                    def providerList = []
+
+                    // Loop through all files in properties data store and add to returned list
+                    for (File fileEntry : folder.listFiles()) {
+                      if (!fileEntry.isDirectory()){
+                        String title = PropertiesPath +  fileEntry.getName()
+                        Properties scmProperties = new Properties()
+                        InputStream input = null
+                        input = new FileInputStream(title)
+                        scmProperties.load(input)
+                        String url = scmProperties.getProperty("scm.url")
+                        String protocol = scmProperties.getProperty("scm.protocol")
+                        String id = scmProperties.getProperty("scm.id")
+                        String output = url + " - " + protocol + " (" + id + ")"
+                        providerList.add(output)
+                      }
+                    }
+
+                    if (providerList.isEmpty()) {
+                        providerList.add("No SCM providers found")
+                    }
+
+                    return providerList;
+              usePredefinedVariables: false
+          editableType: NoFilter
+      - string:
+          trim: false
+          defaultValue: ''
+          name: CARTRIDGE_FOLDER
+          description: The folder within the project namespace where your cartridge
+            will be loaded into.
+      - string:
+          trim: false
+          defaultValue: ''
+          name: FOLDER_DISPLAY_NAME
+          description: Display name of the folder where the cartridge is loaded.
+      - string:
+          trim: false
+          defaultValue: ''
+          name: FOLDER_DESCRIPTION
+          description: Description of the folder where the cartridge is loaded.
+      - booleanParam:
+          defaultValue: false
+          name: ENABLE_CODE_REVIEW
+          description: Enables Code Reviewing for the selected cartridge
+      - booleanParam:
+          defaultValue: false
+          name: OVERWRITE_REPOS
+          description: If ticked, existing code repositories (previously loaded by
+            the cartridge) will be overwritten. For first time cartridge runs, this
+            property is redundant and will perform the same behavior regardless.
+  - rebuildSettings:
+      rebuildDisabled: false
+      autoRebuild: false
+  resumeBlocked: false
+- kind: freeStyle
+  name: Load_Platform
+  blockBuildWhenDownstreamBuilding: false
+  blockBuildWhenUpstreamBuilding: false
+  builders:
+  - jobDsl:
+      ignoreMissingFiles: false
+      removedJobAction: IGNORE
+      unstableOnDeprecation: false
+      lookupStrategy: JENKINS_ROOT
+      additionalClasspath: ''
+      failOnSeedCollision: false
+      sandbox: false
+      ignoreExisting: false
+      removedViewAction: IGNORE
+      targets: |-
+        bootstrap/Load_Cartridge.groovy
+        bootstrap/Workspace_Management/*.groovy
+      failOnMissingPlugin: false
+  concurrentBuild: false
+  description: ''
+  disabled: false
+  displayName: Load_Platform
+  label: master
+  scm:
+    gitSCM:
+      gitTool: Default
+      userRemoteConfigs:
+      - userRemoteConfig:
+          name: origin
+          credentialsId: GIT_CREDENTIALS
+          url: https://innersource.accenture.com/scm/adop-e/adop-platform-management.git
+      branches:
+      - branchSpec:
+          name: ${ADOP_PLATFORM_MANAGEMENT_VERSION}
+  scmCheckoutStrategy:
+    standard: {}
+- kind: pipeline
+  name: mywizard-dmt-base-ami-amazon-597714063940-dev
+  concurrentBuild: false
+  definition:
+    cpsScmFlowDefinition:
+      scriptPath: jenkinsfile-ami-base.groovy
+      scm:
+        gitSCM:
+          userRemoteConfigs:
+          - userRemoteConfig:
+              credentialsId: GIT_CREDENTIALS
+              url: https://innersource.accenture.com/scm/adop-e/adop-e-base-ami.git
+          branches:
+          - branchSpec:
+              name: ASYFKHXP-7786
+      lightweight: true
+  description: ''
+  disabled: false
+  displayName: mywizard-dmt-base-ami-amazon-597714063940-dev
+  properties:
+  - rebuildSettings:
+      rebuildDisabled: false
+      autoRebuild: false
+  - parameters:
+      parameterDefinitions:
+      - string:
+          trim: false
+          name: AWS_ACCOUNT_IDS
+          description: 'A comma-separated (no spaces!) list of accounts you want your
+            AMI to be published to besides the origin account of your source AMI.
+            Note: AMIs are not published to other accounts if encryption is on.'
+      - choice:
+          name: AWS_EC2_REGION
+          description: The name of the region, in which to launch the EC2 instance
+            to create the AMI.
+          choices:
+          - eu-west-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-south-1
+          - ap-southeast-1
+          - ap-southeast-2
+          - ca-central-1
+          - eu-central-1
+          - sa-east-1
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+      - choice:
+          name: AWS_REGIONS
+          description: Select the regions you want your AMI to be published to besides
+            the origin region of your source AMI.
+          choices:
+          - ''
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-south-1
+          - ap-southeast-1
+          - ap-southeast-2
+          - ca-central-1
+          - eu-central-1
+          - eu-west-1
+          - sa-east-1
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+      - string:
+          trim: false
+          name: AWS_SOURCE_AMI
+          description: The AMI which we will use as a base for provisioning.
+      - string:
+          trim: false
+          name: AWS_SUBNET_ID
+          description: The subnet where we will spin up a temporary instance for the
+            AMI baking.
+      - string:
+          trim: false
+          name: AWS_VPC_ID
+          description: The VPC where we will spin up a temporary instance for the
+            AMI baking.
+      - choice:
+          name: ENCRYPTION_ON
+          description: Instruct packer to automatically create a copy of the AMI with
+            an encrypted boot volume.
+          choices:
+          - 'true'
+          - 'false'
+      - string:
+          trim: false
+          name: INSTANCE_PROFILE_NAME
+          description: Instance profile name - needs session manager permissions.
+      - string:
+          trim: false
+          defaultValue: centos
+          name: INSTANCE_USER
+          description: The default user for the source AMI e.g. centos, ec2-user,
+            ubuntu.
+      - string:
+          trim: false
+          name: KMS_KEY_ID
+          description: The ID of the KMS key to use for boot volume encryption. This
+            only applies to the main region, other regions where the AMI will be copied
+            will be encrypted by the default EBS KMS key.
+      - string:
+          trim: false
+          defaultValue: mywizard-dmt-base-ami
+          name: AMI_NAME_TAG
+          description: Name-tag value for the AMI.
+  resumeBlocked: false
+- kind: pipeline
+  name: mywizard-dmt-jenkins-agent-builder-597714063940-dev
+  concurrentBuild: false
+  definition:
+    cpsScmFlowDefinition:
+      scriptPath: jenkinsfile-one-shot-container-build.groovy
+      scm:
+        gitSCM:
+          userRemoteConfigs:
+          - userRemoteConfig:
+              credentialsId: GIT_CREDENTIALS
+              url: https://innersource.accenture.com/scm/adop-e/mywizard-dmt-jenkins-agents.git
+          branches:
+          - branchSpec:
+              name: '*/master'
+      lightweight: true
+  description: ''
+  disabled: false
+  displayName: mywizard-dmt-jenkins-agent-builder-597714063940-dev
+  properties:
+  - rebuildSettings:
+      rebuildDisabled: false
+      autoRebuild: false
+  - parameters:
+      parameterDefinitions:
+      - choice:
+          name: TEST_MODE
+          description: Testing mode.
+          choices:
+          - 'true'
+          - 'false'
+  - buildDiscarder:
+      strategy:
+        logRotator:
+          artifactDaysToKeep: -1
+          artifactNumToKeep: -1
+          daysToKeep: 360
+          numToKeep: 10
+  resumeBlocked: false
+- kind: pipeline
+  name: simple-test-pipeline
+  concurrentBuild: true
+  definition:
+    cpsFlowDefinition:
+      sandbox: true
+      script: "pipeline {\n    agent {\n        label 'adop-sre-agent'\n    } \n \
+        \   stages {\n        stage('Example Build') {\n            steps {\n    \
+        \            sh 'aws ec2 describe-instances'\n                sh 'sleep 9999'\n\
+        \            }\n        }\n    }\n}"
+  description: ''
+  disabled: false
+  displayName: simple-test-pipeline
+  properties:
+  - rebuildSettings:
+      rebuildDisabled: false
+      autoRebuild: false
+  resumeBlocked: false
+- kind: freeStyle
+  name: test
+  blockBuildWhenDownstreamBuilding: false
+  blockBuildWhenUpstreamBuilding: false
+  builders:
+  - shell:
+      command: env
+  concurrentBuild: false
+  description: ''
+  disabled: false
+  displayName: test
+  label: macos-plugin
+  scm:
+    none: {}
+  scmCheckoutStrategy:
+    standard: {}
+- kind: pipeline
+  name: test-innersource-scm
+  concurrentBuild: true
+  definition:
+    cpsScmFlowDefinition:
+      scriptPath: Jenkinsfile
+      scm:
+        gitSCM:
+          userRemoteConfigs:
+          - userRemoteConfig:
+              credentialsId: 22c177b4-f51a-4e75-bc1c-924b29194c27
+              url: ssh://git@git.dev.adop.accenture.com/divi/bbb.git
+          branches:
+          - branchSpec:
+              name: '*/master'
+      lightweight: true
+  description: ''
+  disabled: false
+  displayName: test-innersource-scm
+  properties:
+  - rebuildSettings:
+      rebuildDisabled: false
+      autoRebuild: false
+  resumeBlocked: false
+- kind: pipeline
+  name: test-private-innersource
+  concurrentBuild: true
+  definition:
+    cpsScmFlowDefinition:
+      scriptPath: Jenkinsfile
+      scm:
+        gitSCM:
+          userRemoteConfigs:
+          - userRemoteConfig:
+              credentialsId: 1903f4e7-999b-4a5b-afa3-e7224e1ebcb0
+              url: https://git.dev.adop.accenture.com/scm/divi/bbb.git
+          branches:
+          - branchSpec:
+              name: '*/master'
+      lightweight: true
+  description: ''
+  disabled: false
+  displayName: test-private-innersource
+  properties:
+  - rebuildSettings:
+      rebuildDisabled: false
+      autoRebuild: false
+  resumeBlocked: false
+- kind: pipeline
+  name: test-private-innersource-alex
+  concurrentBuild: true
+  definition:
+    cpsFlowDefinition:
+      sandbox: true
+      script: "pipeline {\n    agent {\n        label 'adop-sre-agent'\n    } \n \
+        \   stages {\n        stage('Example Build') {\n            steps {\n    \
+        \            //sh 'sleep 9999'\n                sh 'curl https://bitbucket.dev-adop-platform.com\
+        \ -v'\n                sh 'curl https://alex.local -v -k'\n              \
+        \  sh 'curl https://git.dev.adop.accenture.com -v -k'\n\n            }\n \
+        \       }\n    }\n}"
+  description: ''
+  disabled: false
+  displayName: test-private-innersource-alex
+  properties:
+  - rebuildSettings:
+      rebuildDisabled: false
+      autoRebuild: false
+  resumeBlocked: false
+- kind: folder
+  name: Workspace_Management
+  displayName: Workspace Management
+  healthMetrics:
+  - worstChildHealthMetric:
+      recursive: true
+  items:
+  - kind: freeStyle
+    name: Generate_Workspace
+    blockBuildWhenDownstreamBuilding: false
+    blockBuildWhenUpstreamBuilding: false
+    buildWrappers:
+    - preBuildCleanup:
+        disableDeferredWipeout: false
+        deleteDirs: false
+        cleanupParameter: ''
+        externalDelete: ''
+    - envInjectPasswordWrapper:
+        injectGlobalPasswords: true
+        maskPasswordParameters: false
+    - maskPasswords: {}
+    builders:
+    - shell:
+        command: |-
+          #!/bin/bash
+          # Validate Variables
+          pattern=" |'"
+          if [[ "${WORKSPACE_NAME}" =~ ${pattern} ]]; then
+              echo "WORKSPACE_NAME contains a space, please replace with an underscore - exiting..."
+              exit 1
+          fi
+    - conditionalBuilder:
+        runCondition:
+          shellCondition:
+            command: "#!/bin/bash\nif [ \"${ADOP_ACL_ENABLED}\" == \"false\" ]\nthen\n\
+              \  exit 1\nfi\nexit 0\n                "
+        runner:
+          dontRun: {}
+    - jobDsl:
+        ignoreMissingFiles: false
+        removedJobAction: IGNORE
+        unstableOnDeprecation: false
+        lookupStrategy: JENKINS_ROOT
+        additionalClasspath: ''
+        failOnSeedCollision: false
+        sandbox: false
+        ignoreExisting: false
+        removedViewAction: IGNORE
+        targets: workspaces/jobs/**/*.groovy
+        failOnMissingPlugin: false
+    concurrentBuild: false
+    description: ''
+    disabled: false
+    displayName: Generate_Workspace
+    label: docker
+    parameters:
+    - string:
+        trim: false
+        defaultValue: ''
+        name: WORKSPACE_NAME
+        description: The name of the project to be generated.
+    - string:
+        trim: false
+        defaultValue: ''
+        name: ADMIN_USERS
+        description: The list of users' email addresses that should be setup initially
+          as admin. They will have full access to all jobs within the project.
+    - string:
+        trim: false
+        defaultValue: ''
+        name: DEVELOPER_USERS
+        description: The list of users' email addresses that should be setup initially
+          as developers. They will have full access to all non-admin jobs within the
+          project.
+    - string:
+        trim: false
+        defaultValue: ''
+        name: VIEWER_USERS
+        description: The list of users' email addresses that should be setup initially
+          as viewers. They will have read-only access to all non-admin jobs within
+          the project.
+    scm:
+      gitSCM:
+        gitTool: Default
+        userRemoteConfigs:
+        - userRemoteConfig:
+            name: origin
+            credentialsId: adop-jenkins-master
+            url: ssh://git@innersource.accenture.com/adop-e/adop-platform-management.git
+        branches:
+        - branchSpec:
+            name: ${ADOP_PLATFORM_MANAGEMENT_VERSION}
+    scmCheckoutStrategy:
+      standard: {}

@@ -1,0 +1,45 @@
+removeStrategy:
+  rbac: SYNC
+  items: NONE
+items:
+  - kind: folder
+    displayName: ACME Minion Build Tests
+    name: acme-minion
+    description: ''
+  - kind: folder
+    displayName: ACME Self Service
+    name: acmetools
+    items:
+    - kind: backupAndRestore
+      name: test-backup-casc-2
+      blockBuildWhenDownstreamBuilding: false
+      blockBuildWhenUpstreamBuilding: false
+      buildersList:
+      - backupBuilder:
+          subjects:
+          - buildRecordSubject: {
+              }
+          - jobConfigurationSubject: {
+              }
+          format:
+            tarGzFormat: {
+              }
+          exclusive: false
+          store:
+            sftpStore:
+              ssh:
+                sSHConnector:
+                  port: 22
+                  host: myhost
+                  credentialsId: i-dont-do-anything
+              dir: /opt/repo/backup-test/
+              localBackup: false
+          retentionPolicy:
+            noRetentionPolicy: {
+              }
+          safeDelaySeconds: 30
+      concurrentBuild: false
+      description: ''
+      disabled: false
+      displayName: test-backup-casc-2
+

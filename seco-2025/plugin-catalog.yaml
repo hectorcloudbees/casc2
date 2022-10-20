@@ -1,0 +1,8 @@
+type: plugin-catalog
+version: '1'
+name: default-catalog
+displayName: Default catalog for GKE support-general Support CBCI Controllers
+configurations:
+- description: Extensions to CAP
+  includePlugins:
+    google-login: {version: '1.6'}

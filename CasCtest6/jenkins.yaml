@@ -1,0 +1,537 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - file:
+          fileName: "id_rsa"
+          id: "adop-jenkins-private"
+          scope: GLOBAL
+          secretBytes: "{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}"
+      - basicSSHUserPrivateKey:
+          description: "ADOP Jenkins Master"
+          id: "adop-jenkins-master"
+          privateKeySource:
+            directEntry:
+              privateKey: "{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}"
+          scope: GLOBAL
+          username: "git"
+          usernameSecret: true
+      - usernamePassword:
+          id: "pluggable-scm"
+          password: "{AQAAABAAAAAQasdYsGkdfJmUtAAtXG5t0qhhP2KZ6srF8mPFJZM6KnU=}"
+          scope: GLOBAL
+          username: "bitbucketusername"
+          usernameSecret: true
+      - usernamePassword:
+          id: "1903f4e7-999b-4a5b-afa3-e7224e1ebcb0"
+          password: "{AQAAABAAAAAQyCFjJblZ3+BJtjX03iS4iWRKkDV/v9N3aRzU3ayhN3k=}"
+          scope: GLOBAL
+          username: "jan"
+      - basicSSHUserPrivateKey:
+          id: "22c177b4-f51a-4e75-bc1c-924b29194c27"
+          privateKeySource:
+            directEntry:
+              privateKey: "{AQAAABAAAAywhtJQjcuwJF1iVE4EKw6hqxwkyWEuVGX+upjy0ANQ9eqT2KVlUwNc5LGYuWfxHcPKxzkNC+tE36rbX6iPGuVNMB+zmqHGIr8C5p2XaFxoQP38s5OIOIH4rS1jWoX6oHQal0lRh91Vny8TIeaHNGKNcQ7cKypmpODKrChnaEHaMqfQCgwSbfo0THA9ILtEZw/Tle/Nch/xKKTe0Ewrv2mLU8A77sBlsEBgVMllrNyAhQrbw1maMu+3vKOO0tcDh+7hGsbLVpWQcVxABjNSsBnS5NsuiIWD4Kndzv73fmxGrwB5n6Cf2rbK1S/x7ehr2T0NcFp5A6cShkaijSYNHiV88MS8X4qd+81EnqomND5QmvaePQxaZpqCi0rdhfaggVqRSrflUnp5ssKZvii8kVdDHDG5aUdKbzmkgYlzg0oS5Xa5JtOKDRPWkQmd0K7b4nNhlXRS0TvjLLX0t8wV7FVsEE+FJw1M4SpbQDtnoMPNddOSejw9DHqHi4Gf+r44oUXvinxbK+gP6SrPw/mzfst6Z4vzf2nJDelK7bjQcIVcmatvNwB0ttoOgiYiN3YlUD1bJwhPxNgRv6s+BKtwFK25bpoNqDDJ4v2se2bGrbpbm8ydAsQ3s3F0IvmK9RgM+3jQt4gGeVhAY3Z0F33O7dfzZjISOlWj38ntvHPJYxdqExe1+DOvYIZ+im+pxnBK5dXXZBJuZ6l2Nhsb+sISGZ9ToP87jFiJe77KXc51DunrfV4TdHgBw2JVFoZsyrISkf2qw3mnzG6ntw8gcDj0C+sAiWCfiATUJ1IyHygc+mrPoF39XxUZxnkobDyMEI9bdsx8DsNrE+ay/+PDOW1mQfIaDDaBBb+mfJbp6svc0JAji2HPRk/G9X/gZQIi10dxyUeEnA1S3cA6F3Dq0OjBFEEvHqAw0l9MBENnraFHkv2VRAM+I1fFdUSClpSnWGxj699Wx3JFAcgQeGQMVzW+9BSkgsW0aR3CHEmRvp2OCyO1LHE5uMgiYktU1cqXYFAcPczHLXkOApCV1650zfVQqf3AeRZAIydAJpICdhrzTL0kOPpFKx5d6Ue72zTbNOgtcjoatwwLQZFUFlCGJuPsbwFCSNzUDWR6crXvRdv1AOs9AFzAGJe+kgXjxaevQO9Zv/Pdwa5jTcqx4atlQf7roahrg2uicAzgK83ls62PytqBa1vZbyKYz1xrMkLQYvCbU8XLtcoV+R7LrW+QeCDr+33YEZce/WY2kyl55/xuX7RipLpXsD0a92UoyUntpSHOdf36BwoeB0n5S0xyMEAx8JsNqLH9JGKIHscOd7fDy7nSf96R5AOaXuKEF7QUmv/UpdmZvlWwGviIt0ERijuMP7JZqJITg3OI2RaiaPTfCX/ePydd+qqfc0h+neoBCvRLm/Aw/1iyJkNZXJGFDmYrd3CSDe1UfeICv057vQqVuHV1PH8OaGVhSSkXDtgXhlgoyXsN63VXysHlIVqhFcZAyJKMUjSvAx5C6XfLcfm2jcmyBROM/Wpa4zTKUhsT13/34ht9p0Qvq0lYRV7DYVOvAr4nihjgIi30BkaHLEG6NTtgESnOHGobsxyVq8igNinYb/QhrH9a4vEj1aEnaFrPkLom2TMUVZUt4KuSm3JNLsNsIb8XKV9wLN0Mg5Drn3HMkyhbUnkCwYhDn446aqy6YWXT+SotOOXQ82qBNG5iDWbwMMGAgmz/gudiAk5W5gF+dR30VG1UtQM3dA3kem3ouq1+VA3DkmvOmZAop0y9maeKQQ8796q7gzQkpc4l0973lrUvOEapkkcfeg8E0+OoX81FBANP/ZBCQ15QDYZ0fCumQtREpD/smjW49zgh/SQhzkMs0XILzGU3ldb0Wg/Ft1iv0ghG5MONBJmuUniiw5zWJWS7Zcoh8ZC6XfrmdqRgF1NGqgsJHrfCx/gAQmYydD3GQPNyzoxXqtqP47+A2M7TbNcj5h7Ef5wHrlO4j45wmdV//k/7yCxL4xYpWjBbRc/oxv3admGPMoVG852kcWfkyQpp8kswrTSmq3ZnaaFx8Q2S5nMMAc2VyFfDy56/A740TWvkH5CuLkV520AXW+wsyOJf6yUtUsbHdAw65NZQjw2zNbmDhXAqYO0iF8Y3nDP8xOtP1jeLeBHE8AnlvHUl3qXbEFzc1rYz8Im+WYYaRDffhXdqKYiPHx2cpCt7RcRvP8lhxBoC0cEcPO7YM359Tv2gvY7lDFiO8XezGhkuRvDFC3z5dlVYL6cL+gLt52cRpEvGPi3r44E7XQuzZCYiTBmsbl82U2KgZ1RBxjlYjJ3dgvdVpVn9Oyo4zNLcDyyZR0Ee1k/XNt6Q4fhdz46siJRyC8xwWSv5d2Xho5rptJeqeDJIa7BO+0noziMSJncUzH4XqvINe6oyP0cI7Nta3Dwt6gHPdkC1rFBqKL2sbfx1RXX8UkCmBAQBo9/rCoyz9ofMuyKBU9jU8E63ZTiwIJXwvls15BSQ529E3arpXi61z5DKihDKIgyfZFnF1XIYR/dvuiH2OA7fBef+2qfsiSQ/pLzue1jkz6RmjSUSAPnoY4jNrxOOUG/qw2elyl4co0YgMnOn2RqOHpUOQadC0Rs6DOEKhsLBy+HBEsdxX7E1DZOtJHqn8Sx0BkoDa/5c+m8MfTKrfAdet42jS5nYQ9z8sCeSPbLu9FPF9innEzAnQ2SwjAd7dantFJjVoR6LUv14NkHaDFvmsBPMqUkSUsxvBhc0LDGDJkT428b/ka4bLzMdQug/ebaHBxcMtmwrnEoe7eQW+Kp4V/HmQyvzQFWdlD9AoDk+oqcrERGiajTNwSNRSdD5YXTBlhyEUdrNagPhE/Kx/IpQdgJSeEla5iTJweh+9pvkryyWY5XT0iaKH7AmDE47GYP+N82PAmxBU1HnHEcf6txAE4sm0QY/hnPXWMKB3UjJuo4ewtI/5xsICD1tS2nJqrQNpPQRRukA/sCawzJeJbFBbU8aS1HuJIj8RFpJYvgH71VRkEVCI3/xqMpy4lY1B9M5Ooba0hjePC8cCbR/3vJxPerG388JiZhPyjUQAu/mf1XIZoQr4ER3Fn80KpyvY7G+8tJiI3lFufkKYmMZ0xSCQyAc4VbCSHKhTgI4bRcBL5Ll2CVZSVc+xTg9qOtTTvJnX3qrR7EXoMDmZ8UbuPcJDOO4jvw24QoMv8cCEeGXdIdC2pUs95SkVqhhLFoo4b6B4AmzX/QFR8XdYtWTE8my+WRzpOKh/UNITlZkSTV1FhVxUYfCkHdPF+bg0Lo37bThAkWJjfWV/5s8WWJXY3qgdOZZ+xKjoGvP4w8evjIXAwudrn5LQLtkQUeuCz4bByb9Plt9mHKjsZm1Ct37pMLUTPQwjxkrifFCWLKJoOfi/tC6MwfKW+WFLvXa/NzawoM2CL2+sZ0zVDQNvfWgW47iCjBtK4/9LnZeYaJoJiTI+C52MPNpbUphtxAwCRGpOjCarjJD3xbPGW8vxqNLGML7E24fuFTMEOXq5gtFmSpjdI596zOi/3wTl04LkAnNhIFCGAF8LATYH99nK42ssEjSpmkazgfL2JfCHKbYDzTHRxAjasWkrh+O5TdvlkcccUaPc0KCZXHvhjllo4x97jwCo6He8iVBh0HJdvdBTKN58VbMFkHWZg5XU3Can277kuzzoGhEvpgjE52ZbGndNGzq6Kkxw6ywREIIv5LpmhJUhwyw4/luvGUY2ncnD4kj22gPClseEpHbNW6iNky955lhhZYpkH8qztwR2X25HNJ3FRbmKEQ4N5t13ixi9XKcrytdH3iomQ/1oip3wjC9CKKAlFP1SGWkHN1c3w878/4j90R3BOkqbi5mnBcM+WX4UhhqJk13vduRZA9AXft4l9Ajeoy3AwLcjHR09PaDMn4m7i0atSbJLpmxBUb3j9BeW3h7cLEIT3IpsTF3dBSNhHfzVAF6D59xNOV3wY97WpaJV4aBIhHNq6Jyl0d6eafKSn771uxuVCFVzz+LFohHiCxEGNZtVH0e/VaYQGQyNOQ7dRvNbwmniRM7o10fdif2l3hBaf3ZZOgd6GTBqtjJBQMXNYZFSd/VImBz/dkGg2O5THqyKpn5nXFX6sXqzl/kAqX0MO1FhDdzEuY35MskBQXe0jByyHjSmHyT83J4B0x7Z5EWqicydIsQngcxoChC+z9OPtqdaNBVZfqddBb/BCRAQsKQrqm0fqD5bD/c41zM4EfsFRH9CpIUMamIhsgyP427QUK007iY5fn5iWOqxl7w74Do38CKyUteKiumcK1uwpZ1zyzUCIF092tTy1t2bXVM4o9byZkBx2Oc9Wdp7wTQegOtyrquYy1HpTolc9in36wLodh9SkTR}"
+          scope: GLOBAL
+          username: "jenkins"
+      - usernamePassword:
+          description: "macos"
+          id: "macos"
+          password: "{AQAAABAAAAAQm55GWgtzmmgvO4V2bV6O+RhWTscmakPkh1qaay+M/2Q=}"
+          scope: GLOBAL
+          username: "vm-user"
+      - aws:
+          iamRoleArn: "arn:aws:iam::597714063940:role/mywizard-dmt-platform-iac-standard-iam-role"
+          id: "arn:aws:iam::597714063940:role/mywizard-dmt-platform-iac-standard-iam-role"
+          scope: GLOBAL
+          secretKey: "{AQAAABAAAAAQVFvbsv2bEzdBNIlhijP5mEqwVpF0oHllrWcQl2J3Ofk=}"
+      - usernamePassword:
+          description: "https://alm.accenture.com/wiki/display/AOD/Admin+user+API+token+usage#AdminuserAPItokenusage-PRDBBA04779DIRPSREinnerAPItoken"
+          id: "GIT_CREDENTIALS"
+          password: "{AQAAABAAAAAw8e+VnktPP8g4+hbsBQEyXyIQDQ+G+eLyxvMQva4vqrc6yKHPPUwooMs3aTCr6SwrBYbvfPJEsK8ktD2sJfQpuA==}"
+          scope: GLOBAL
+          username: "A04779DIRPSREinner"
+jenkins:
+  agentProtocols:
+  - "Diagnostic-Ping"
+  - "JNLP4-connect"
+  - "OperationsCenter2"
+  - "Ping"
+  authorizationStrategy: "cloudBeesRoleBasedAccessControl"
+  clouds:
+  - ecs:
+      credentialsId: "ttt"
+      allowedOverrides: "all"
+      cluster: "arn:aws:ecs:eu-west-1:597714063940:cluster/mywizard-dmt-core2-dev-ecs"
+      jenkinsUrl: "https://adop-sre.jenkins.dev.adop.accenture.com/"
+      name: "mywizard-dmt-dev-ecs"
+      regionName: "eu-west-1"
+      retentionTimeout: 1
+      slaveTimeoutInSeconds: 99999
+      taskPollingIntervalInSeconds: 9999
+      templates:
+      - assignPublicIp: true
+        cpu: 0
+        cpuArchitecture: "X86_64"
+        defaultCapacityProvider: false
+        enableExecuteCommand: false
+        environments:
+        - name: "JENKINS_DIRECT_CONNECTION"
+          value: "10.108.147.196:31222"
+        image: "jenkins/inbound-agent"
+        label: "core2-ecs-build"
+        launchType: "FARGATE"
+        logDriver: "awslogs"
+        logDriverOptions:
+        - name: "awslogs-group"
+          value: "ECSLogGroup-jenkins-for-ecs-with-agents"
+        - name: "awslogs-region"
+          value: "eu-west-1"
+        - name: "awslogs-stream-prefix"
+          value: "jenkins-agent"
+        memory: 0
+        memoryReservation: 0
+        networkMode: "awsvpc"
+        operatingSystemFamily: "LINUX"
+        platformVersion: "LATEST"
+        privileged: true
+        remoteFSRoot: "/home/jenkins/agent"
+        securityGroups: "sg-04e4629f98231bf95"
+        sharedMemorySize: 0
+        subnets: "subnet-00a19ffe07102b2db,subnet-0a351d77938ca202e,subnet-005fae35acdfd5a14,"
+        taskDefinitionOverride: "jenkins-inbound"
+        uniqueRemoteFSRoot: false
+      tunnel: "10.108.148.93:31222"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: true
+  disableRememberMe: false
+  disabledAdministrativeMonitors:
+  - "OldData"
+  globalNodeProperties:
+  - envVars:
+      env:
+      - key: "ADOP_ACL_ENABLED"
+        value: "false"
+      - key: "ADOP_LDAP_ENABLED"
+        value: "false"
+      - key: "ADOP_PLATFORM_MANAGEMENT_GIT_URL"
+        value: "ssh://git@innersource.accenture.com/adop-e/adop-platform-management.git"
+      - key: "ADOP_PLATFORM_MANAGEMENT_VERSION"
+        value: "*/master"
+      - key: "ADOP_PLUGGABLE_SCM_VERSION"
+        value: "af4c5b6f9afcebb40f16224615878a5b721d5036"
+      - key: "CARTRIDGE_SOURCES"
+        value: "https://s3-eu-west-1.amazonaws.com/adop-e-cartridge-list/ADOP_M_cartridges.yml"
+      - key: "LDAP_ROOTDN"
+        value: "ttt"
+      - key: "PLUGGABLE_SCM_PROVIDER_PATH"
+        value: "/var/jenkins_home/userContent/job_dsl_additional_classpath/"
+      - key: "PLUGGABLE_SCM_PROVIDER_PROPERTIES_PATH"
+        value: "/var/jenkins_home/userContent/datastore/pluggable/scm"
+      - key: "SMTP_DEFAULT_SUFFIX"
+        value: "@accenture.com"
+      - key: "SMTP_HOST"
+        value: "smtp.hub.internal.adop-platform.com"
+      - key: "SMTP_PORT"
+        value: "1225"
+      - key: "SYSTEM_ADMIN_MAIL_ADDRESS"
+        value: "adop-m.no-reply.cje@mailer.adop.accenture.com"
+  labelAtoms:
+  - name: "admin-tools-agent"
+  - name: "adop-sre-agent"
+  - name: "built-in"
+  - name: "core2-ecs-build"
+  - name: "sre-kaniko"
+  - name: "sre-kaniko-antons"
+  - name: "test-agent"
+  - name: "windows-agent"
+  log:
+    recorders:
+    - loggers:
+      - level: "FINEST"
+        name: "fr.edf.jenkins.plugins.mac"
+      name: "mac"
+    - loggers:
+      - level: "ALL"
+        name: "com.cloudbees.jenkins.plugins.amazonecs"
+      - level: "ALL"
+        name: "com.cloudbees.jenkins.plugins.amazonecs.ECSCloud"
+      - level: "ALL"
+        name: "com.cloudbees.jenkins.plugins.amazonecs.ECSLauncher"
+      - level: "ALL"
+        name: "com.cloudbees.jenkins.plugins.amazonecs.ECSProvisioningStrategy"
+      - level: "ALL"
+        name: "com.cloudbees.jenkins.plugins.amazonecs.ECSSlave"
+      name: "ecs"
+  markupFormatter:
+    rawHtml:
+      disableSyntaxHighlighting: false
+  mode: NORMAL
+  myViewsTabBar: "standard"
+  noUsageStatistics: true
+  numExecutors: 0
+  primaryView:
+    all:
+      name: "all"
+  projectNamingStrategy: "standard"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+  scmCheckoutRetryCount: 0
+  securityRealm: "operationsCenter"
+  slaveAgentPort: 50000
+  updateCenter:
+    sites:
+    - id: "core-mm-offline"
+      url: "file:/tmp/jenkins/war/WEB-INF/plugins/update-center.json"
+    - id: "cap-core-mm"
+      url: "https://jenkins-updates.cloudbees.com/update-center/envelope-core-mm/update-center.json"
+  views:
+  - all:
+      name: "all"
+  viewsTabBar: "standard"
+beekeeper:
+  enabled: true
+  securityWarnings:
+    enabledForCore: true
+    enabledForPlugins: true
+  upgrades:
+    autoDowngradePlugins: false
+    autoUpgradePlugins: false
+kube:
+  podTemplatesConfiguration:
+    templates:
+    - containers:
+      - args: "/var/jenkins_config/jenkins-agent"
+        command: "/bin/sh"
+        image: "597714063940.dkr.ecr.eu-west-1.amazonaws.com/adop-e-cje-k8s-agent:1.1.2"
+        livenessProbe:
+          failureThreshold: 0
+          initialDelaySeconds: 0
+          periodSeconds: 0
+          successThreshold: 0
+          timeoutSeconds: 0
+        name: "jnlp"
+        ttyEnabled: true
+        workingDir: "/home/jenkins/"
+      envVars:
+      - envVar:
+          key: "AWS_DEFAULT_REGION"
+          value: "eu-west-1"
+      id: "95322962-ba7b-451b-a610-04df8d13beb7"
+      instanceCap: 1
+      instanceCapStr: "1"
+      label: "adop-sre-agent"
+      name: "adop-sre-agent"
+      namespace: "adop-sre"
+      serviceAccount: "jenkins-agent-sa-dev-597714063940"
+      slaveConnectTimeout: 100
+      slaveConnectTimeoutStr: "100"
+      volumes:
+      - configMapVolume:
+          configMapName: "jenkins-agent"
+          mountPath: "/var/jenkins_config"
+          optional: false
+      - configMapVolume:
+          configMapName: "coredns"
+          mountPath: "/var/jenkins_config"
+          optional: false
+      yaml: |-
+        spec:
+         securityContext:
+           fsGroup: 65534
+      yamlMergeStrategy: "override"
+      yamls:
+      - |-
+        spec:
+         securityContext:
+           fsGroup: 65534
+    - id: "6e9dedb5-bef9-4fa2-a0de-6b2b19518dbc"
+      label: "windows-agent"
+      name: "windows-agent"
+      yaml: |-
+        ---
+        apiVersion: v1
+        spec:
+          nodeSelector:
+            kubernetes.io/os: windows
+            kubernetes.io/arch: amd64
+          serviceAccountName: adop-sre-sa
+          containers:
+          - name: jnlp
+            image: jenkins/inbound-agent:windowsservercore-1809
+            imagePullPolicy: IfNotPresent
+            tty: true
+          - name: shell
+            image: mcr.microsoft.com/powershell:preview-windowsservercore-1809
+            imagePullPolicy: IfNotPresent
+            tty: true
+            dnsPolicy: ClusterFirst
+            restartPolicy: Always
+      yamlMergeStrategy: "override"
+      yamls:
+      - |-
+        ---
+        apiVersion: v1
+        spec:
+          nodeSelector:
+            kubernetes.io/os: windows
+            kubernetes.io/arch: amd64
+          serviceAccountName: adop-sre-sa
+          containers:
+          - name: jnlp
+            image: jenkins/inbound-agent:windowsservercore-1809
+            imagePullPolicy: IfNotPresent
+            tty: true
+          - name: shell
+            image: mcr.microsoft.com/powershell:preview-windowsservercore-1809
+            imagePullPolicy: IfNotPresent
+            tty: true
+            dnsPolicy: ClusterFirst
+            restartPolicy: Always
+    - containers:
+      - image: "597714063940.dkr.ecr.eu-west-1.amazonaws.com/mywizard-dmt-platform-ecr/kaniko-project:awscli"
+        livenessProbe:
+          failureThreshold: 0
+          initialDelaySeconds: 0
+          periodSeconds: 0
+          successThreshold: 0
+          timeoutSeconds: 0
+        name: "kaniko"
+        ttyEnabled: true
+        workingDir: "/tmp/jenkins/agent"
+      envVars:
+      - envVar:
+          key: "AWS_SDK_LOAD_CONFIG"
+          value: "true"
+      - envVar:
+          key: "AWS_EC2_METADATA_DISABLED"
+          value: "true"
+      id: "12f127cd-fd33-4266-b2e5-f71dc0c1d116"
+      instanceCap: 1
+      instanceCapStr: "1"
+      label: "sre-kaniko"
+      name: "sre-kaniko"
+      namespace: "adop-sre"
+      nodeSelector: "worker=master"
+      serviceAccount: "adop-sre-sa"
+      slaveConnectTimeout: 100
+      slaveConnectTimeoutStr: "100"
+      volumes:
+      - configMapVolume:
+          configMapName: "jenkins-agent"
+          mountPath: "/tmp/jenkins_config"
+          optional: false
+      yaml: |-
+        spec:
+         securityContext:
+           fsGroup: 65534
+      yamlMergeStrategy: "override"
+      yamls:
+      - |-
+        spec:
+         securityContext:
+           fsGroup: 65534
+    - containers:
+      - envVars:
+        - envVar:
+            key: "AWS_DEFAULT_REGION"
+            value: "eu-west-1"
+        - envVar:
+            key: "AWS_EC2_METADATA_DISABLED"
+            value: " true"
+        - envVar:
+            key: "AWS_SDK_LOAD_CONFIG"
+            value: "true"
+        image: "597714063940.dkr.ecr.eu-west-1.amazonaws.com/mywizard-dmt-platform-ecr/kaniko-project:awscli"
+        livenessProbe:
+          failureThreshold: 0
+          initialDelaySeconds: 0
+          periodSeconds: 0
+          successThreshold: 0
+          timeoutSeconds: 0
+        name: "kaniko"
+        workingDir: "/tmp/jenkins/"
+      id: "fe185218-ec90-4fd5-8032-1e0710acad97"
+      instanceCap: 1
+      instanceCapStr: "1"
+      label: "sre-kaniko-antons"
+      name: "sre-kaniko-antons"
+      namespace: "adop-sre"
+      serviceAccount: "adop-sre-sa"
+      slaveConnectTimeout: 100
+      slaveConnectTimeoutStr: "100"
+      yaml: |-
+        spec:
+        securityContext:
+          privileged: true
+      yamlMergeStrategy: "override"
+      yamls:
+      - |-
+        spec:
+        securityContext:
+          privileged: true
+support:
+  automatedBundleConfiguration:
+    componentIds:
+    - "CloudBeesAssuranceSupport"
+    - "CloudBeesCasCBundlesSupport"
+    - "AgentsConfigFile"
+    - "ConfigFileComponent"
+    - "OtherConfigFilesComponent"
+    - "AboutBrowser"
+    - "AboutJenkins"
+    - "AboutUser"
+    - "AdministrativeMonitors"
+    - "AgentProtocols"
+    - "BuildQueue"
+    - "CustomLogs"
+    - "DumpExportTable"
+    - "EnvironmentVariables"
+    - "FileDescriptorLimit"
+    - "GCLogs"
+    - "HeapUsageHistogram"
+    - "ItemsContent"
+    - "AgentsJVMProcessSystemMetricsContents"
+    - "MasterJVMProcessSystemMetricsContents"
+    - "JenkinsLogs"
+    - "LoadStats"
+    - "LoggerManager"
+    - "Metrics"
+    - "NetworkInterfaces"
+    - "NodeMonitors"
+    - "OtherLogs"
+    - "ReverseProxy"
+    - "RootCAs"
+    - "RunningBuilds"
+    - "SlaveCommandStatistics"
+    - "SlaveLaunchLogs"
+    - "SlaveLogs"
+    - "AgentsSystemConfiguration"
+    - "MasterSystemConfiguration"
+    - "SystemProperties"
+    - "TaskLogs"
+    - "ThreadDumps"
+    - "UpdateCenter"
+    - "UserCount"
+    - "ComponentImpl"
+    - "SlowRequestComponent"
+    - "HighLoadComponent"
+    - "DeadlockRequestComponent"
+    - "OperationsCenterSupportComponent"
+    - "PipelineTimings"
+    - "PipelineThreadDump"
+    enabled: true
+    period: 1
+globalCredentialsConfiguration:
+  configuration:
+    providerFilter: "none"
+    typeFilter: "none"
+security:
+  anonymizeSupportBundle:
+    enabled: false
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+  envInject:
+    enableLoadingFromMaster: false
+    enablePermissions: false
+    hideInjectedVars: false
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: true
+  sSHD:
+    port: -1
+unclassified:
+  artifactManager:
+    artifactManagerFactories:
+    - "jSync"
+  buildDiscarders:
+    configuredBuildDiscarders:
+    - "jobBuildDiscarder"
+  email-ext:
+    adminRequiredForTemplateTesting: false
+    allowUnregisteredEnabled: false
+    charset: "UTF-8"
+    debugMode: false
+    defaultBody: |-
+      $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+
+      Check console output at $BUILD_URL to view the results.
+    defaultContentType: "text/plain"
+    defaultSubject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
+    defaultTriggerIds:
+    - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
+    mailAccount:
+      smtpPassword: "{AQAAABAAAAAQsr474Ez5HoYJkoq5VfbxOaMWVvNzcbALu9BfmZngkRg=}"
+    maxAttachmentSize: -1
+    maxAttachmentSizeMb: -1
+    precedenceBulk: false
+    watchingEnabled: false
+  experimentalPlugins:
+    enabled: false
+  fingerprints:
+    fingerprintCleanupDisabled: false
+    storage: "file"
+  gitHubConfiguration:
+    apiRateLimitChecker: ThrottleForNormalize
+  gitHubPluginConfig:
+    hookUrl: "https://adop-sre.jenkins.dev.adop.accenture.com/github-webhook/"
+  gitSCM:
+    addGitTagAction: false
+    allowSecondFetch: false
+    createAccountBasedOnEmail: false
+    disableGitToolChooser: false
+    hideCredentials: false
+    showEntireCommitSummaryInChanges: false
+    useExistingAccountWithSameEmail: false
+  globalLibraries:
+    libraries:
+    - defaultVersion: "master"
+      name: "adop-pluggable-scm-jenkinsfile"
+      retriever:
+        modernSCM:
+          scm:
+            git:
+              id: "global-shared-library"
+              remote: "https://github.com/Accenture/adop-pluggable-scm-jenkinsfile.git"
+              traits:
+              - "gitBranchDiscovery"
+  junitTestResultStorage:
+    storage: "file"
+  location:
+    adminAddress: "adop-m.no-reply.cje@mailer.adop.accenture.com"
+    url: "https://adop-sre.jenkins.dev.adop.accenture.com/"
+  mailer:
+    charset: "UTF-8"
+    defaultSuffix: "@accenture.com"
+    smtpHost: "smtp.hub.internal.adop-platform.com"
+    smtpPort: "1225"
+    useSsl: false
+    useTls: false
+  mavenModuleSet:
+    localRepository: "default"
+  operationsCenterRootAction:
+    connectionDetails: "----- BEGIN CONNECTION DETAILS -----\nH4sIAAAAAAAAAB3NSw4CIRCE4buwtsGMGGGu4QmapsYXkQmPcWG8u+j2y1+pt7oUfjY1KzeBow+g\r\
+      \nha0n6w8TefYgF4I7ntxiI0Tt1C2Odk8c80q1YEgvadC1tXU2Ru5ZtKTcYwAqSS7QdftRrw1Fpyyc\r\
+      \n/pUZ0xfCOcsD43/hVPH5AsMSP3SPAAAA\r\n----- END CONNECTION DETAILS -----\n"
+  pollSCM:
+    pollingThreadCount: 10
+  timestamper:
+    allPipelines: false
+    elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
+    systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
+  usageStatisticsCloudBees:
+    disabledJenkinsUsageStatistics: true
+    usageStatisticsCollected: false
+tool:
+  cloudbeesPluginUsageAnalyzer:
+    enabled: true
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+  mavenGlobalConfig:
+    globalSettingsProvider: "standard"
+    settingsProvider: "standard"
