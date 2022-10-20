@@ -1,0 +1,10 @@
+apiVersion: "1"
+id: "bundle001-mcb"
+description: "This is configuration bundle for mcardenas"
+version: "6"
+plugins:
+  - "plugins.yaml"
+jcasc:
+  - "jenkins.yaml"
+catalog:
+  - "plugin-catalog.yaml"

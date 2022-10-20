@@ -1,0 +1,30 @@
+jenkins:
+  systemMessage: "parent message 102"
+  numExecutors: 1
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+        - usernamePassword:
+            scope: GLOBAL
+            id: cbj_github_pat_userpass
+            username: cbj_github_pat_userpass
+            password: "pass"
+            description: "Github access token stored as userpass"
+        - usernamePassword:
+            scope: GLOBAL
+            id: APIGEE_MORTGAGES_MACHINEUSER_ST
+            username: mortgages_machineuser@mytestenvi.co.uk 
+            password: "pass"
+            description: "MYTEST mgmt server login creds for st env"
+        - usernamePassword:
+            scope: GLOBAL
+            id: APIGEE_MORTGAGES_MACHINEUSER_SIT
+            username: mortgages_machineuser@mytestenvi.co.uk 
+            password: "pass"
+            description: "MYTEST mgmt server login creds for sit env"
+        - string:
+            scope: GLOBAL
+            id: cbj_github_pat@test.test
+            secret: "test"
+            description: "Github access token stored as secret text"

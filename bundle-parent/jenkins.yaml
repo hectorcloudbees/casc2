@@ -1,0 +1,28 @@
+jenkins:
+  systemMessage: "parent message"
+  numExecutors: 1
+  globalNodeProperties:
+    - envVars:
+        env:
+          - key: FOO
+            value: BAR
+          - key: FOO-2
+            value: BAR-2
+          - key: FOO-3
+            value: BAR-3
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+        - usernamePassword:
+            id: "example-user-pass"
+            username: lola@test.com
+            password: "test"
+            description: "Sample credentials of example-username"
+            scope: GLOBAL
+tool:
+  git:
+    installations:
+      - name: Default
+        home: "git"

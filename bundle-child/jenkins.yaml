@@ -1,0 +1,23 @@
+jenkins:
+  systemMessage: "Controller configured using CloudBees CasC by LVR in child"
+  globalNodeProperties:
+    - envVars:
+        env:
+          - key: FOO
+            value: BAR
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+        - usernamePassword:
+            id: "example-user-pass"
+            username: lola@test-child.com
+            password: "test"
+            description: "Sample credentials of example-username"
+            scope: GLOBAL
+tool:
+  git:
+    installations:
+      - name: Default
+        home: "git/child"

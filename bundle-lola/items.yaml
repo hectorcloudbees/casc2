@@ -1,0 +1,42 @@
+removeStrategy:
+  items: "none"
+  rbac: "sync"
+
+items:
+- kind: folder
+  name: Administration
+  displayName: Administration
+  items:
+  - kind: pipeline
+    name: test
+    concurrentBuild: true
+    definition:
+      cpsScmFlowDefinition:
+        scriptPath: test
+        scm:
+          gitSCM:
+            userRemoteConfigs:
+            - userRemoteConfig:
+                credentialsId: test
+                url: https://test
+            branches:
+            - branchSpec:
+                name: feat-test
+        lightweight: true
+    description: ''
+    disabled: false
+    displayName: test
+    properties:
+    - parameters:
+        parameterDefinitions:
+        - choice:
+            name: logLevel
+            description: Niveau du log
+            choices:
+            - info
+            - debug
+    - pipelineTriggers:
+        triggers:
+        - cron:
+            spec: 0 1 * * *
+    resumeBlocked: false

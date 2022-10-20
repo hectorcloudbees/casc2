@@ -1,0 +1,64 @@
+jenkins:
+  authorizationStrategy: "cloudBeesRoleBasedAccessControl"
+  disabledAdministrativeMonitors:
+  - "com.cloudbees.jenkins.support.impl.cloudbees.TcpSlaveAgentListenerMonitor"
+  globalNodeProperties:
+  - envVars:
+      env:
+      - key: "ACC_DEFAULT_SLACK_TEAM_CHANNEL"
+        value: "#alpaca-notifications"
+      - key: "ACTIVE_REGIONS"
+        value: "us-east-1,us-west-2,us-gov-east-1"
+  numExecutors: 0
+  updateCenter:
+    sites:
+    - id: "virtual-cap-core-mm"
+      url: "https://jenkins-updates.cloudbees.com/update-center/envelope-core-mm/update-center.json"
+advisor:
+  acceptToS: true
+  email: "test@test.com"
+  excludedComponents:
+  - "GCLogs"
+  - "Agents"
+  - "AgentsConfigFile"
+  - "ConfigFileComponent"
+  - "RootCAs"
+  - "SlaveLogs"
+  - "OtherConfigFilesComponent"
+  - "HeapUsageHistogram"
+  nagDisabled: false
+notificationConfiguration:
+  enabled: true
+  router: "operationsCenter"
+security:
+  anonymizeSupportBundle:
+    enabled: true
+unclassified:
+  rules:
+    rules:
+    - pattern: ".*/timeline/data/"
+      response:
+        code: 403
+        content: |-
+          <h1>Forbidden call</h1>
+          Call forbidden due to large amount of build history.
+          If you desire to use this functionality, clean up your history and contact mcardenas
+    - pattern: ".+[/\\\\]securityRealm[/\\\\]finishLogin.*"
+      response:
+        code: 403
+        content: |2
+
+          <h1>Forbidden call</h1>
+          For more information, please visit the <a href="https://cloudbees.com/r/support/cloudbees-security-advisory-2021-08-31">following page</a>
+          or <a href="https://support.cloudbees.com">contact CloudBees support</a> mentioning SECURITY-2469.
+        contentType: "text/html"
+  defaultFolderConfiguration:
+    healthMetrics:
+    - worstChildHealthMetric:
+        recursive: false
+  gitSCM:
+    createAccountBasedOnEmail: false
+    showEntireCommitSummaryInChanges: false
+    useExistingAccountWithSameEmail: false
+  timestamper:
+    allPipelines: true
