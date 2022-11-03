@@ -1,0 +1,6 @@
+unclassified:
+  hibernationConfiguration:
+    activities:
+    - "web"
+    enabled: true
+    gracePeriod: 57600
